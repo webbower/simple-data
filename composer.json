@@ -1,0 +1,24 @@
+{
+    "name": "webbower/simple-model",
+    "description": "A simple base model for PHP",
+    "authors": [
+        {
+            "name": "Matt Bower",
+            "email": "matt@webbower.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^4.6"
+    },
+    "autoload": {
+        "psr-0": { "Webbower\\SimpleModel\\": "src/" },
+        "psr-4": { "Webbower\\SimpleModel\\": "src/" }
+    },
+    "autoload-dev": {
+        "psr-0": { "Webbower\\SimpleModel\\Test\\": "tests/_files/" },
+        "psr-4": { "Webbower\\SimpleModel\\Test\\": "tests/_files/" }
+    }
+}
