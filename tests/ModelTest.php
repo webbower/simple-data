@@ -1,13 +1,11 @@
 <?php
 
-use \Webbower\SimpleModel\SimpleModel;
-
-class SimpleModelTest extends PHPUnit_Framework_TestCase
+class ModelTest extends PHPUnit_Framework_TestCase
 {
   protected $model;
 
   protected function setUp() {
-    $this->model = new \Webbower\SimpleModel\Test\Person([
+    $this->model = new \Webbower\SimpleData\Test\Person([
       'firstName' => 'Bob',
       'lastName'  => 'Smith',
       'age'       => 32,
@@ -21,10 +19,10 @@ class SimpleModelTest extends PHPUnit_Framework_TestCase
     unset($this->model);
   }
 
-  public function testSimpleModelCanBeCreated()
+  public function testModelCanBeCreated()
   {
-    $this->assertInstanceOf('\Webbower\SimpleModel\SimpleModel', $this->model);
-    $this->assertInstanceOf('\Webbower\SimpleModel\Test\Person', $this->model);
+    $this->assertInstanceOf('\Webbower\SimpleData\Model', $this->model);
+    $this->assertInstanceOf('\Webbower\SimpleData\Test\Person', $this->model);
   }
   
   public function testGetterForRawData()
@@ -44,7 +42,7 @@ class SimpleModelTest extends PHPUnit_Framework_TestCase
 
   /**
    * @expectedException         OutOfBoundsException
-   * @expectedExceptionMessage  Error getting data foo: does not exist on Webbower\SimpleModel\Test\Person
+   * @expectedExceptionMessage  Error getting data foo: does not exist on Webbower\SimpleData\Test\Person
    */
   public function testGetterThrowsExceptionOnNonexistantData()
   {
@@ -53,7 +51,7 @@ class SimpleModelTest extends PHPUnit_Framework_TestCase
 
   /**
    * @expectedException         OutOfBoundsException
-   * @expectedExceptionMessage  Error getting data someMethod: does not exist on Webbower\SimpleModel\Test\Person
+   * @expectedExceptionMessage  Error getting data someMethod: does not exist on Webbower\SimpleData\Test\Person
    */
   public function testGetterThrowsExceptionOnRegularMethodAsProperty()
   {
@@ -62,7 +60,7 @@ class SimpleModelTest extends PHPUnit_Framework_TestCase
 
   /**
    * @expectedException         OutOfBoundsException
-   * @expectedExceptionMessage  Cannot modify data properties on Webbower\SimpleModel\Test\Person after instantiation
+   * @expectedExceptionMessage  Cannot modify data properties on Webbower\SimpleData\Test\Person after instantiation
    */
   public function testSetterThrowsException()
   {
@@ -82,7 +80,7 @@ class SimpleModelTest extends PHPUnit_Framework_TestCase
 
   /**
    * @expectedException         OutOfBoundsException
-   * @expectedExceptionMessage  Cannot unset data properties on Webbower\SimpleModel\Test\Person after instantiation
+   * @expectedExceptionMessage  Cannot unset data properties on Webbower\SimpleData\Test\Person after instantiation
    */
   public function testUnsetThrowsException()
   {
@@ -91,13 +89,13 @@ class SimpleModelTest extends PHPUnit_Framework_TestCase
 
   public function testHasProperty()
   {
-    $this->assertTrue( $this->model->hasProperty('firstName'));
-    $this->assertTrue( $this->model->hasProperty('lastName'));
-    $this->assertTrue( $this->model->hasProperty('age'));
-    $this->assertTrue( $this->model->hasProperty('married'));
-    $this->assertTrue( $this->model->hasProperty('kids'));
-    $this->assertTrue( $this->model->hasProperty('house'));
-    $this->assertFalse($this->model->hasProperty('foo'));
+    $this->assertTrue( $this->model->hasField('firstName'));
+    $this->assertTrue( $this->model->hasField('lastName'));
+    $this->assertTrue( $this->model->hasField('age'));
+    $this->assertTrue( $this->model->hasField('married'));
+    $this->assertTrue( $this->model->hasField('kids'));
+    $this->assertTrue( $this->model->hasField('house'));
+    $this->assertFalse($this->model->hasField('foo'));
   }
 
   public function testToArray()
@@ -126,8 +124,8 @@ class SimpleModelTest extends PHPUnit_Framework_TestCase
     $this->assertNotEquals($this->model, $copy);
     
     // Assert the copy is of the same classes
-    $this->assertInstanceOf('\Webbower\SimpleModel\SimpleModel', $copy);
-    $this->assertInstanceOf('\Webbower\SimpleModel\Test\Person', $copy);
+    $this->assertInstanceOf('\Webbower\SimpleData\Model', $copy);
+    $this->assertInstanceOf('\Webbower\SimpleData\Test\Person', $copy);
 
     // Assert changed values on copy
     $this->assertEquals('Bob',     $copy->firstName);

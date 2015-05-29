@@ -1,6 +1,6 @@
 {
     "name": "webbower/simple-model",
-    "description": "A simple base model for PHP",
+    "description": "Simple data structures for PHP",
     "authors": [
         {
             "name": "Matt Bower",
@@ -14,11 +14,11 @@
         "phpunit/phpunit": "^4.6"
     },
     "autoload": {
-        "psr-0": { "Webbower\\SimpleModel\\": "src/" },
-        "psr-4": { "Webbower\\SimpleModel\\": "src/" }
+        "psr-0": { "Webbower\\SimpleData\\": "src/" },
+        "psr-4": { "Webbower\\SimpleData\\": "src/" }
     },
     "autoload-dev": {
-        "psr-0": { "Webbower\\SimpleModel\\Test\\": "tests/_files/" },
-        "psr-4": { "Webbower\\SimpleModel\\Test\\": "tests/_files/" }
+        "psr-0": { "Webbower\\SimpleData\\Test\\": "tests/_files/" },
+        "psr-4": { "Webbower\\SimpleData\\Test\\": "tests/_files/" }
     }
 }

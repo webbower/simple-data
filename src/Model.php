@@ -1,6 +1,6 @@
 <?php
 
-namespace Webbower\SimpleModel;
+namespace Webbower\SimpleData;
 
 use \OutOfBoundsException;
 
@@ -17,15 +17,18 @@ use \OutOfBoundsException;
 *   special methods defined on the model subclass where the method name is prefixed with "get"
 *   followed by a capitalized letter. See the example below.
 *
-* ``` php
-* class Person extends SimpleModel {
+* ```php
+* class Person extends Model {
 *   public method getFullName()
 *   {
 *     return $this->firstName . ' ' . $this->lastName;
 *   }
 * }
 *
-* $me = new Person(['firstName' = 'Bob', 'lastName' => 'Smith']);
+* $me = new Person([
+*   'firstName' => 'Bob',
+*   'lastName' => 'Smith',
+* ]);
 *
 * // Raw data
 * echo $me->firstName; // Bob
@@ -40,7 +43,7 @@ use \OutOfBoundsException;
 *
 * @todo Add type checking
 */
-class SimpleModel
+class Model
 {
   /**
    * @var string The "type" (class name) of this class instance
@@ -74,7 +77,7 @@ class SimpleModel
    *
    * @api
    *
-   * @param string name The name of the data property to retrieve
+   * @param string $name The name of the data property to retrieve
    * @return mixed The data associated with the key
    * @throws OutOfBoundsException Thrown if the property key can't resolve to any data
    */
@@ -82,7 +85,7 @@ class SimpleModel
   {
     $getterMethodName = 'get' . ucfirst($name);
 
-    if ($this->hasProperty($name)) {
+    if ($this->hasField($name)) {
       // Check for the raw data first
       return $this->data[$name];
     } elseif ($this->hasMethod($getterMethodName)) {
@@ -118,12 +121,12 @@ class SimpleModel
    *
    * @api
    *
-   * @param string name The name of the property to check
+   * @param string $name The name of the property to check
    * @return boolean True if the data exists and isn't null, false otherwise
    */
   final public function __isset($name)
   {
-    return $this->hasProperty($name) && $this->$name !== null;
+    return $this->hasField($name) && $this->$name !== null;
   }
 
   /**
@@ -157,12 +160,12 @@ class SimpleModel
    *
    * @api
    *
-   * @param string name The data key/method name to check for
+   * @param string $name The data key/method name to check for
    * @return boolean True if the data/method exists, false otherwise
    */
   public function has($name)
   {
-    return $this->hasProperty($name) || $this->hasMethod($name);
+    return $this->hasField($name) || $this->hasMethod($name);
   }
 
   /**
@@ -172,10 +175,10 @@ class SimpleModel
    *
    * @api
    *
-   * @param string name The data key to check for
+   * @param string $name The data key to check for
    * @return boolean True if the data key exists, false otherwise
    */
-  public function hasProperty($name)
+  public function hasField($name)
   {
     return array_key_exists($name, $this->data);
   }
@@ -187,7 +190,7 @@ class SimpleModel
    *
    * @api
    *
-   * @param string name The method name to check for
+   * @param string $name The method name to check for
    * @return boolean True if the method name exists, false otherwise
    */
   public function hasMethod($name)

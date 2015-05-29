@@ -1,7 +1,7 @@
 {
-  "name": "simple-model",
+  "name": "simple-data",
   "version": "0.1.0",
-  "description": "A simple base model for PHP",
+  "description": "Simple data structures for PHP",
   "directories": {
     "test": "tests"
   },

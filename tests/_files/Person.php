@@ -1,10 +1,10 @@
 <?php
 
-namespace Webbower\SimpleModel\Test;
+namespace Webbower\SimpleData\Test;
 
-use \Webbower\SimpleModel\SimpleModel;
+use \Webbower\SimpleData\Model;
 
-class Person extends SimpleModel
+class Person extends Model
 {
   // protected static $fields = [
   //   'firstName' => 'String',
